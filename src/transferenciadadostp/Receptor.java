@@ -53,8 +53,6 @@ public class Receptor {
         for (int i = 0; i < bits.length; i++) {
             if (i != 0 && i == indice - 1) {
                 bits[i] = !(bits[i]);
-            } else {
-                bits[i] = bits[i];
             }
         }
 

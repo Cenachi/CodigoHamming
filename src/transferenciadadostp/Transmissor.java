@@ -44,6 +44,7 @@ public class Transmissor {
 
     private boolean[] dadoBitsHemming(boolean bits[]) {
 
+        
         boolean hemmingBits[] = new boolean[4];
 
         hemmingBits[0] = bits[0] ^ bits[1] ^ bits[3] ^ bits[4] ^ bits[6];
