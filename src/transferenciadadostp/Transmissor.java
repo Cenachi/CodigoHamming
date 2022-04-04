@@ -44,35 +44,35 @@ public class Transmissor {
 
     private boolean[] dadoBitsHemming(boolean bits[]) {
 
-        
+        // Vetor para receber os 4 bits adcionais;
         boolean hemmingBits[] = new boolean[4];
 
+        // Calculando os 4 bits;
         hemmingBits[0] = bits[0] ^ bits[1] ^ bits[3] ^ bits[4] ^ bits[6];
         hemmingBits[1] = bits[0] ^ bits[2] ^ bits[3] ^ bits[5] ^ bits[6];
         hemmingBits[2] = bits[1] ^ bits[2] ^ bits[3] ^ bits[7];
         hemmingBits[3] = bits[4] ^ bits[5] ^ bits[6] ^ bits[7];
 
+        // Formatando o código de Hamming de 12bits;
         boolean codigoHemming[] = {
 
                 hemmingBits[0], hemmingBits[1], bits[0], hemmingBits[2],
                 bits[1], bits[2], bits[3], hemmingBits[3],
                 bits[4], bits[5], bits[6], bits[7]
         };
-        
-        return codigoHemming;
+
+        return codigoHemming; // Enviando o codigo formatado;
     }
 
     public void enviaDado(Receptor receptor) {
         for (int i = 0; i < this.mensagem.length(); i++) {
             boolean bits[] = streamCaracter(this.mensagem.charAt(i));
 
-            /*-------AQUI você deve adicionar os bits de Hemming para contornar os problemas de ruidos
-                        você pode modificar o método anterior também*/
             boolean bitsHemming[] = dadoBitsHemming(bits);
 
             // add ruidos na mensagem a ser enviada para o receptor
             geradorRuido(bitsHemming);
-            
+
             // enviando a mensagem "pela rede" para o receptor
             receptor.receberDadoBits(bitsHemming);
         }
